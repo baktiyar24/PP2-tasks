@@ -1,0 +1,1 @@
+x = memoryview(bytes(5))
