@@ -1,9 +1,7 @@
 n = int(input())
-arr = list(map(int, input().split()))
-seen = set()
-for x in arr:
-    if x in seen:
-        print("NO")
-    else:
-        print("YES")
-        seen.add(x)
+names = set()
+for i in range(n):
+    name = input().strip()
+    names.add(name)
+
+print(len(names))
