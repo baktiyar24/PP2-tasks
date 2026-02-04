@@ -1,9 +1,15 @@
 n = int(input())
-if n % 2 == 0:
-    print("NO")
-elif n % 3 == 0:
-    print("NO")
-elif n % 5 == 0:
-    print("NO")
+
+if n <= 1:
+    print("Not prime")
 else:
-    print("YES")
+    is_prime = True
+    for i in range(2, n):
+        if n % i == 0:
+            is_prime = False
+            break
+
+    if is_prime:
+        print("Yes")
+    else:
+        print('No')
