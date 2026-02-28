@@ -1,8 +1,15 @@
-def evens(n):
-    for i in range(0, n+1, 2):
-        yield i
+def evenGenerator(n):
+    counter = 0
+    while counter <= n:
+        yield counter
+        counter += 2
+
 
 n = int(input())
-result = ",".join(str(x) for x in evens(n))
-print(result)
+
+for num in evenGenerator(n):
+    if num + 2 <= n:
+        print(num, end=",")
+    else:
+        print(num, end="")
 
