@@ -12,7 +12,7 @@ car = pygame.image.load("Practice10/Racer/images/car.png").convert_alpha()
 car = pygame.transform.scale(car, (120,150))
 car_x = 335
 car_y = 400
-car_speed = 4
+car_speed = 2
 
 # Background
 bg = pygame.image.load("Practice10/Racer/images/background.png").convert_alpha()
@@ -34,8 +34,8 @@ enemy_mask = pygame.mask.from_surface(enemy)
 gameplay = True
 
 label = pygame.font.Font(None, 40)
-lose_label = label.render("You lose!", True, (0,0,0))
-restart_label = label.render("Restart", True, (0,0,0))
+lose_label = label.render("You lose!", True, (255,0,0))
+restart_label = label.render("Restart", True, (255,255,255))
 restart_label_rect = restart_label.get_rect(topleft=(340,300))
 
 
@@ -74,7 +74,7 @@ while running:
             bg_y = 0
 
     else:
-        screen.fill("WHITE")
+        screen.fill("BLACK")
         screen.blit(lose_label,(330,200))
         screen.blit(restart_label,(restart_label_rect))
         bg_sound.stop()
@@ -95,6 +95,6 @@ while running:
             enemy_list_in_game.append(enemy.get_rect(topleft=(new_x, -150)))
 
     pygame.display.update()
-    clock.tick(300)
+    clock.tick(220)
 
 pygame.quit()
