@@ -1,6 +1,11 @@
-username,email,birthday,group,phone,phone_type
-Alice Smith,alice@gmail.com,1990-05-14,Friend,+7-700-111-2222,mobile
-Alice Smith,alice@gmail.com,1990-05-14,Friend,+7-700-111-3333,work
-Bob Jones,bob@work.com,1985-11-30,Work,+7-701-555-6666,mobile
-Carol White,carol@mail.ru,1995-03-22,Family,+7-702-999-0000,home
-Dan Brown,dan@yahoo.com,,Other,+7-703-123-4567,mobile
+name,email,birthday,group,phone,type
+Alibek,alibek@gmail.com,2000-05-10,Friends,7771112233,mobile
+Aruzhan,aruzhan@gmail.com,1999-03-21,Family,87001234567,home
+Dias,dias@mail.com,2001-11-02,Work,77005551234,work
+Aigerim,aigerim@gmail.com,2002-07-15,Friends,7779988776,mobile
+Nursultan,nurs@gmail.com,1998-01-30,Other,87001112233,mobile
+Madina,madina@gmail.com,2000-09-12,Family,77002223344,home
+Alisher,alisher@mail.com,1997-06-25,Work,7773332211,work
+Dana,dana@gmail.com,2003-04-18,Friends,87009998877,mobile
+Erbolat,erbolat@mail.com,1995-12-05,Other,77007778899,work
+Zhanar,zhanar@gmail.com,2001-02-14,Family,7776665544,home

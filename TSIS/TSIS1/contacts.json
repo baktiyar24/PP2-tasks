@@ -1,0 +1,133 @@
+[
+    {
+        "name": "Alibek",
+        "email": "alibek@gmail.com",
+        "birthday": "2000-05-10",
+        "group": "Friends",
+        "phones": [
+            {
+                "number": "7771112233",
+                "type": "mobile"
+            },
+            {
+                "number": "771234567",
+                "type": "mobile"
+            }
+        ]
+    },
+    {
+        "name": "Aruzhan",
+        "email": "aruzhan@gmail.com",
+        "birthday": "1999-03-21",
+        "group": "Family",
+        "phones": [
+            {
+                "number": "87001234567",
+                "type": "home"
+            }
+        ]
+    },
+    {
+        "name": "Dias",
+        "email": "dias@mail.com",
+        "birthday": "2001-11-02",
+        "group": "Work",
+        "phones": [
+            {
+                "number": "77005551234",
+                "type": "work"
+            }
+        ]
+    },
+    {
+        "name": "Aigerim",
+        "email": "aigerim@gmail.com",
+        "birthday": "2002-07-15",
+        "group": "Friends",
+        "phones": [
+            {
+                "number": "7779988776",
+                "type": "mobile"
+            }
+        ]
+    },
+    {
+        "name": "Nursultan",
+        "email": "nurs@gmail.com",
+        "birthday": "1998-01-30",
+        "group": "Other",
+        "phones": [
+            {
+                "number": "87001112233",
+                "type": "mobile"
+            }
+        ]
+    },
+    {
+        "name": "Madina",
+        "email": "madina@gmail.com",
+        "birthday": "2000-09-12",
+        "group": "Family",
+        "phones": [
+            {
+                "number": "77002223344",
+                "type": "home"
+            }
+        ]
+    },
+    {
+        "name": "Alisher",
+        "email": "alisher@mail.com",
+        "birthday": "1997-06-25",
+        "group": "Work",
+        "phones": [
+            {
+                "number": "7773332211",
+                "type": "work"
+            }
+        ]
+    },
+    {
+        "name": "Dana",
+        "email": "dana@gmail.com",
+        "birthday": "2003-04-18",
+        "group": "Friends",
+        "phones": [
+            {
+                "number": "87009998877",
+                "type": "mobile"
+            }
+        ]
+    },
+    {
+        "name": "Erbolat",
+        "email": "erbolat@mail.com",
+        "birthday": "1995-12-05",
+        "group": "Other",
+        "phones": [
+            {
+                "number": "77007778899",
+                "type": "work"
+            }
+        ]
+    },
+    {
+        "name": "Zhanar",
+        "email": "zhanar@gmail.com",
+        "birthday": "2001-02-14",
+        "group": "Family",
+        "phones": [
+            {
+                "number": "7776665544",
+                "type": "home"
+            }
+        ]
+    },
+    {
+        "name": "Ilias",
+        "email": "test@mail.com",
+        "birthday": "2005-01-01",
+        "group": "Friends",
+        "phones": []
+    }
+]

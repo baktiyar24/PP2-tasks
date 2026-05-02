@@ -1,116 +1,60 @@
-CREATE OR REPLACE PROCEDURE add_phone(
-    p_contact_name VARCHAR,
-    p_phone        VARCHAR,
-    p_type         VARCHAR DEFAULT 'mobile'
+CREATE OR REPLACE PROCEDURE add_phone (
+    p_contact_name TEXT,
+    p_phone TEXT,
+    p_type TEXT
 )
-LANGUAGE plpgsql AS $$
-DECLARE
-    v_id INTEGER;
+LANGUAGE plpgsql
+AS $$
+DECLARE cid INT;
 BEGIN
-    SELECT id INTO v_id FROM contacts WHERE username = p_contact_name;
+    SELECT id INTO cid FROM contacts WHERE name = p_contact_name;
 
-    IF v_id IS NULL THEN
-        RAISE EXCEPTION 'Contact "%" not found.', p_contact_name;
+    IF cid IS NULL THEN
+        RAISE EXCEPTION 'Contact not found';
     END IF;
 
-    IF p_type NOT IN ('home', 'work', 'mobile') THEN
-        RAISE EXCEPTION 'Invalid phone type "%". Use home, work, or mobile.', p_type;
-    END IF;
-
-    INSERT INTO phones (contact_id, phone, type)
-    VALUES (v_id, p_phone, p_type);
+    INSERT INTO phones(contact_id, phone, type)
+    VALUES (cid, p_phone, p_type);
 END;
 $$;
 
 
-CREATE OR REPLACE PROCEDURE move_to_group(
-    p_contact_name VARCHAR,
-    p_group_name   VARCHAR
+CREATE OR REPLACE PROCEDURE move_to_group (
+    p_contact_name TEXT,
+    p_group_name TEXT
 )
-LANGUAGE plpgsql AS $$
-DECLARE
-    v_contact_id INTEGER;
-    v_group_id   INTEGER;
+LANGUAGE plpgsql
+AS $$
+DECLARE gid INT;
 BEGIN
-    SELECT id INTO v_contact_id FROM contacts WHERE username = p_contact_name;
+    SELECT id INTO gid FROM groups WHERE name = p_group_name;
 
-    IF v_contact_id IS NULL THEN
-        RAISE EXCEPTION 'Contact "%" not found.', p_contact_name;
+    IF gid IS NULL THEN
+        INSERT INTO groups(name)
+        VALUES (p_group_name)
+        RETURNING id INTO gid;
     END IF;
 
-    INSERT INTO groups (name) VALUES (p_group_name)
-    ON CONFLICT (name) DO NOTHING;
-
-    SELECT id INTO v_group_id FROM groups WHERE name = p_group_name;
-
-    UPDATE contacts SET group_id = v_group_id WHERE id = v_contact_id;
+    UPDATE contacts
+    SET group_id = gid
+    WHERE name = p_contact_name;
 END;
 $$;
 
-
-DROP FUNCTION IF EXISTS search_contacts(TEXT);
 
 CREATE OR REPLACE FUNCTION search_contacts(p_query TEXT)
 RETURNS TABLE (
-    contact_id INTEGER,
-    username   VARCHAR,
-    email      VARCHAR,
-    birthday   DATE,
-    group_name VARCHAR,
-    phone      VARCHAR,
-    phone_type VARCHAR,
-    created_at TIMESTAMP
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT DISTINCT ON (c.id, ph.phone)
-        c.id,
-        c.username,
-        c.email,
-        c.birthday,
-        g.name,
-        ph.phone,
-        ph.type,
-        c.created_at
-    FROM contacts c
-    LEFT JOIN groups g ON g.id = c.group_id
-    LEFT JOIN phones ph ON ph.contact_id = c.id
-    WHERE
-        c.username ILIKE '%' || p_query || '%'
-        OR c.email ILIKE '%' || p_query || '%'
-        OR ph.phone ILIKE '%' || p_query || '%'
-    ORDER BY c.id, ph.phone;
-END;
-$$ LANGUAGE plpgsql;
-
-
-DROP FUNCTION IF EXISTS get_contacts_paginated(INT, INT);
-
-CREATE OR REPLACE FUNCTION get_contacts_paginated(lim INT, off INT)
-RETURNS TABLE (
-    id         INTEGER,
-    username   VARCHAR,
-    email      VARCHAR,
-    birthday   DATE,
-    group_name VARCHAR,
-    phones_agg TEXT,
-    created_at TIMESTAMP
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT
-        c.id,
-        c.username,
-        c.email,
-        c.birthday,
-        g.name,
-        STRING_AGG(ph.phone || ' (' || ph.type || ')', ', '),
-        c.created_at
-    FROM contacts c
-    LEFT JOIN groups g ON g.id = c.group_id
-    LEFT JOIN phones ph ON ph.contact_id = c.id
-    GROUP BY c.id, c.username, c.email, c.birthday, g.name, c.created_at
-    ORDER BY c.username
-    LIMIT lim OFFSET off;
-END;
-$$ LANGUAGE plpgsql;
+    name TEXT,
+    email TEXT,
+    phone TEXT
+)
+LANGUAGE sql
+AS $$
+SELECT c.name, c.email, p.phone
+FROM contacts c
+LEFT JOIN phones p ON c.id = p.contact_id
+WHERE
+    c.name ILIKE '%'||p_query||'%'
+    OR c.email ILIKE '%'||p_query||'%'
+    OR p.phone ILIKE '%'||p_query||'%';
+$$;
